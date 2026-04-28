@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>iFanControl Stats</title>
+    <link rel="icon" type="image/png" href="./assets/app-icon.png" />
+    <link rel="apple-touch-icon" href="./assets/app-icon.png" />
+    <link rel="stylesheet" href="./styles.css?v=6" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="dot"></span>
+          <strong>iFanControl Stats</strong>
+        </div>
+        <div id="sessionMeta" class="session-meta hidden"></div>
+        <button id="logoutBtn" class="ghost hidden" type="button">退出登录</button>
+      </header>
+
+      <section id="loginView" class="panel">
+        <h1>维护者登录</h1>
+        <p class="hint">请输入用户名、密码和认证器 6 位动态码。</p>
+        <form id="loginForm" autocomplete="off">
+          <label>
+            用户名
+            <input name="username" type="text" required />
+          </label>
+          <label>
+            密码
+            <input name="password" type="password" required />
+          </label>
+          <label>
+            TOTP 动态码
+            <input name="totp" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required />
+          </label>
+          <button class="primary" type="submit">登录</button>
+        </form>
+        <p id="loginError" class="error hidden"></p>
+      </section>
+
+      <section id="dashboardView" class="hidden">
+        <div class="cards">
+          <article class="metric-card metric-card-primary">
+            <span>当前用户量（近15分钟）</span>
+            <strong id="currentUsers">-</strong>
+          </article>
+          <article class="metric-card">
+            <span>累计下载</span>
+            <strong id="downloadsTotal">-</strong>
+          </article>
+          <article class="metric-card">
+            <span>累计用户量（匿名）</span>
+            <strong id="activeTotal">-</strong>
+          </article>
+          <article class="metric-card metric-card-time">
+            <span>最近刷新 <small style="opacity:.6;font-size:.75em">(每小时更新)</small></span>
+            <strong id="generatedAt">-</strong>
+          </article>
+        </div>
+
+        <div class="version-split">
+          <section class="panel version-panel">
+            <h2>当前版本分布</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>版本 (Build)</th>
+                  <th>用户数</th>
+                </tr>
+              </thead>
+              <tbody id="versionTable"></tbody>
+            </table>
+          </section>
+          <section class="panel version-panel">
+            <h2>版本占比</h2>
+            <div class="pie-wrap">
+              <canvas id="versionPieChart"></canvas>
+              <div id="pieLegend" class="pie-legend"></div>
+            </div>
+          </section>
+        </div>
+
+        <section class="panel">
+          <h2>用户反馈</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:36px">状态</th>
+                  <th>时间</th>
+                  <th>内容</th>
+                  <th>邮箱</th>
+                  <th>版本</th>
+                </tr>
+              </thead>
+              <tbody id="feedbackTable"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">
+            <h2>用户活跃趋势</h2>
+            <label class="inline-select">
+              查看范围
+              <select id="activitySpan">
+                <option value="12" selected>近 12 小时</option>
+                <option value="24">近 24 小时</option>
+                <option value="72">近 3 天</option>
+                <option value="168">近 7 天</option>
+                <option value="720">近 30 天</option>
+              </select>
+            </label>
+          </div>
+          <p class="panel-note">横轴表示所选时间范围，纵轴表示每 15 分钟活跃用户量。</p>
+          <div class="chart-shell">
+            <canvas id="activityChart" width="980" height="260"></canvas>
+          </div>
+          <div class="legend">
+            <span><i class="line line-active"></i>每 15 分钟活跃用户</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-title">
+            <h2>近 30 天趋势</h2>
+            <button id="refreshBtn" class="ghost" type="button">刷新</button>
+          </div>
+          <canvas id="trendChart" width="980" height="320"></canvas>
+          <div class="legend" id="trendLegend">
+            <span><i class="line line-download"></i>下载</span>
+            <span><i class="line line-active"></i>用户量</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>近 30 天明细</h2>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>日期 (UTC)</th>
+                  <th>下载</th>
+                  <th>用户量（去重）</th>
+                  <th>心跳事件</th>
+                </tr>
+              </thead>
+              <tbody id="dailyTable"></tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+    </main>
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
