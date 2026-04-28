@@ -3,6 +3,14 @@
     "date": "2026-04-28",
     "entries": [
       {
+        "time": "23:00",
+        "version": "v2.9.5 / build 39",
+        "desc": {
+          "zh": "紧急修复：撤回 kentsmc 子进程超时机制，解决温度/转速读取卡住不动的问题。",
+          "en": "Hotfix: reverted kentsmc subprocess timeout, fixing temperature/RPM reading freeze."
+        }
+      },
+      {
         "time": "16:45",
         "version": "v2.9.5 / build 38",
         "desc": {
