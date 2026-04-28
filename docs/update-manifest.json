@@ -1,0 +1,14 @@
+{
+  "latest_version": "2.9.5",
+  "latest_build": 38,
+  "min_supported_build": 1,
+  "published_at": "2026-04-28T08:45:00Z",
+  "mandatory": false,
+  "rollout_percent": 100,
+  "notes": "开机自启动改用原生登录项 API，在系统设置中可直接管理。kentsmc 子进程超时保护，防止硬件监控卡死。风扇初始转速从实际读数开始，避免从零起步。菜单栏图标自动恢复，SystemUIServer 重启后不再消失。",
+  "assets": {
+    "macos_arm64_zip_url": "https://ifan-59w.pages.dev/iFanControl-macOS.zip",
+    "sha256": "d9639e8968799b94cf8433e13215e65f9a63fafacae7df452f101c03609cd411",
+    "size": 6008345
+  }
+}

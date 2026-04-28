@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>iFanControl | Apple Silicon Mac 风扇控制工具</title>
+    <meta
+      name="description"
+      content="iFanControl 是一款适用于 Apple Silicon Mac 的简洁风扇控制工具，支持自动调速、手动模式和风扇曲线编辑。"
+    />
+    <link rel="icon" type="image/png" href="./assets/app-icon.png" />
+    <link rel="stylesheet" href="./styles.20260427a.css" />
+  </head>
+  <body>
+    <section class="landing-screen">
+      <section class="hero-section">
+        <svg class="fan-container" viewBox="-100 -100 200 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <defs>
+            <linearGradient id="blade-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="var(--bg-mono-light)"></stop>
+              <stop offset="50%" stop-color="var(--bg-mono-mid)"></stop>
+              <stop offset="100%" stop-color="var(--bg-mono-dark)"></stop>
+            </linearGradient>
+
+            <path
+              id="single-blade"
+              class="blade"
+              d="M 10,-10 C 40,-30 70,-80 85,-90 C 95,-70 70,-20 30,10 Z"
+            ></path>
+          </defs>
+
+          <g id="rotor">
+            <circle cx="0" cy="0" r="14" class="hub"></circle>
+            <circle cx="0" cy="0" r="6" class="hub-core"></circle>
+
+            <use href="#single-blade" transform="rotate(0)"></use>
+            <use href="#single-blade" transform="rotate(51.42)"></use>
+            <use href="#single-blade" transform="rotate(102.85)"></use>
+            <use href="#single-blade" transform="rotate(154.28)"></use>
+            <use href="#single-blade" transform="rotate(205.71)"></use>
+            <use href="#single-blade" transform="rotate(257.14)"></use>
+            <use href="#single-blade" transform="rotate(308.57)"></use>
+          </g>
+        </svg>
+
+        <div class="hero-branding">
+          <div class="label-micro" data-i18n="hero_micro">Apple Silicon Mac</div>
+          <h1>iFanControl</h1>
+          <p class="hero-tagline" data-i18n="hero_tagline">简洁的风扇控制工具。</p>
+        </div>
+
+        <div class="scroll-cue">
+          <span class="scroll-cue-line" aria-hidden="true"></span>
+        </div>
+      </section>
+
+      <aside class="control-panel">
+        <header class="panel-header">
+          <div class="label-micro" data-i18n="panel_home">官方网站</div>
+          <div class="system-status">
+            <div class="status-dot"></div>
+            <div class="label-micro" data-i18n="panel_open_source">开源项目</div>
+          </div>
+        </header>
+
+        <div class="lang-switch" data-lang-switch>
+          <button class="lang-btn" type="button" data-lang="zh">中文</button>
+          <button class="lang-btn" type="button" data-lang="en">EN</button>
+        </div>
+
+        <section class="product-intro">
+          <img class="product-icon" src="./assets/app-icon.png" alt="iFanControl app icon" />
+          <div class="product-name-row">
+            <strong>iFanControl</strong>
+          </div>
+        </section>
+
+        <section class="telemetry-primary">
+          <div class="label-micro muted" data-i18n="compat_label">适用设备</div>
+          <div class="support-title" data-i18n="compat_title">适用于带风扇的 M 系列 Mac</div>
+
+          <div class="telemetry-meta">
+            <div class="meta-group">
+              <div class="meta-head">
+                <span class="meta-icon" aria-hidden="true">◎</span>
+                <div class="label-micro muted" data-i18n="mode_label">控制模式</div>
+              </div>
+              <div class="meta-value" data-i18n="mode_value">自动 / 手动</div>
+            </div>
+            <div class="meta-group">
+              <div class="meta-head">
+                <span class="meta-icon" aria-hidden="true">◌</span>
+                <div class="label-micro muted" data-i18n="curve_label">曲线编辑</div>
+              </div>
+              <div class="meta-value" data-i18n="curve_value">5 点风扇曲线</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="info-section">
+          <p class="panel-copy" data-i18n="panel_copy">实时温度、转速、曲线控制，全部收进菜单栏。</p>
+
+          <div class="free-badge">
+            <span class="free-icon" aria-hidden="true">◈</span>
+            <div class="free-copy">
+              <span class="label-micro" data-i18n="free_title">Free Forever</span>
+              <strong data-i18n="free_desc">完全免费，无订阅，无内购。</strong>
+            </div>
+          </div>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <span class="feature-label">
+                <span class="feature-icon" aria-hidden="true">◐</span>
+                <span data-i18n="f1_label">原生菜单栏</span>
+              </span>
+              <strong class="feature-value" data-i18n="f1_value">实时查看温度与转速</strong>
+            </div>
+            <div class="feature-item">
+              <span class="feature-label">
+                <span class="feature-icon" aria-hidden="true">⟲</span>
+                <span data-i18n="f2_label">自动 / 手动</span>
+              </span>
+              <strong class="feature-value" data-i18n="f2_value">按场景切换</strong>
+            </div>
+            <div class="feature-item">
+              <span class="feature-label">
+                <span class="feature-icon" aria-hidden="true">⌁</span>
+                <span data-i18n="f3_label">5 点曲线</span>
+              </span>
+              <strong class="feature-value" data-i18n="f3_value">自定义温度 / RPM</strong>
+            </div>
+            <div class="feature-item">
+              <span class="feature-label">
+                <span class="feature-icon" aria-hidden="true">≈</span>
+                <span data-i18n="f4_label">平滑过渡算法</span>
+              </span>
+              <strong class="feature-value" data-i18n="f4_value">渐进调速，避免硬切不适</strong>
+            </div>
+          </div>
+
+          <div class="cta-group">
+            <a class="cta-button primary" href="./download" data-i18n="cta_download">下载应用</a>
+            <a class="cta-button secondary" href="https://github.com/PureMilkchun/iFanControl" data-i18n="cta_source">查看源码</a>
+            <button class="cta-button secondary compact" type="button" data-support-open data-i18n="support_button">支持作者</button>
+          </div>
+        </section>
+
+        <footer class="panel-footer label-micro">
+          <span data-i18n="footer_platform">macOS 13+ / Apple Silicon</span>
+          <span>
+            <a href="./download" data-i18n="footer_download">下载 ZIP</a>
+            /
+            <a href="https://github.com/PureMilkchun/iFanControl">GitHub</a>
+          </span>
+        </footer>
+        <div class="build-tag label-micro" data-latest-build>build --</div>
+      </aside>
+    </section>
+
+    <section class="iteration-section" aria-labelledby="iteration-title">
+      <div class="iteration-copy">
+        <div class="label-micro muted" data-i18n="iteration_label">活跃迭代</div>
+        <h2 id="iteration-title" data-i18n="iteration_title">开发者也是用户本身。</h2>
+        <p data-i18n="iteration_body">
+          iFanControl 正在被真实使用，也正在持续修正。每一次小更新，都来自日常使用里发现的具体问题。
+        </p>
+      </div>
+
+      <div class="iteration-board" aria-label="iFanControl iteration stats">
+        <div class="iteration-stat iteration-stat-primary">
+          <span class="iteration-number" data-latest-build-number>--</span>
+          <span class="iteration-unit" data-i18n="iteration_builds">次构建迭代</span>
+        </div>
+        <div class="iteration-stat">
+          <span class="iteration-number">ZIP</span>
+          <span class="iteration-unit" data-i18n="iteration_channel">更新通道</span>
+        </div>
+        <div class="iteration-stat">
+          <span class="iteration-number" data-latest-version>--</span>
+          <span class="iteration-unit" data-i18n="iteration_current">当前版本</span>
+        </div>
+      </div>
+
+      <div class="iteration-note">
+        <span class="iteration-pulse" aria-hidden="true"></span>
+        <span data-i18n="iteration_note">本软件正在活跃迭代中，更新通道保持 ZIP-only。</span>
+      </div>
+    </section>
+
+    <section class="timeline-section" aria-labelledby="timeline-title">
+      <div class="timeline-header">
+        <div class="label-micro muted" data-i18n="timeline_label">更新日志</div>
+        <h2 id="timeline-title" data-i18n="timeline_title">项目时间线</h2>
+      </div>
+
+      <div class="timeline-track" data-timeline-track></div>
+
+      <div class="timeline-expand-wrap">
+        <button class="timeline-expand-btn" type="button" data-timeline-expand data-i18n="timeline_expand">展开完整时间线</button>
+      </div>
+    </section>
+
+    <section class="showcase-section" aria-labelledby="showcase-title">
+      <div class="showcase-header">
+        <div class="label-micro muted" data-i18n="showcase_label">界面展示</div>
+        <h2 id="showcase-title" data-i18n="showcase_title">菜单栏、曲线编辑与实时控制</h2>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="showcase-rail showcase-rail-left">
+          <figure class="showcase-card showcase-card-small">
+            <img src="./assets/showcase/status-pill.png" alt="Status pill preview" />
+            <figcaption data-i18n="showcase_status">状态胶囊</figcaption>
+          </figure>
+          <figure class="showcase-card showcase-card-wide">
+            <img src="./assets/showcase/curve-editor.png" alt="Curve editor preview" />
+            <figcaption data-i18n="showcase_curve">5 点曲线编辑</figcaption>
+          </figure>
+        </div>
+
+        <div class="showcase-stage">
+          <figure class="showcase-card showcase-card-tall showcase-card-primary">
+            <img src="./assets/showcase/sensor-picker.png" alt="Sensor picker preview" />
+            <figcaption data-i18n="showcase_sensor">温度源与传感器分组</figcaption>
+          </figure>
+        </div>
+
+        <div class="showcase-rail showcase-rail-right">
+          <figure class="showcase-card showcase-card-small-alt">
+            <img src="./assets/showcase/status-pill-alt.png" alt="Status pill alternative preview" />
+            <figcaption data-i18n="showcase_menu">菜单栏实时状态</figcaption>
+          </figure>
+          <figure class="showcase-card showcase-card-medium">
+            <img src="./assets/showcase/safety-floor.png" alt="Safety floor preview" />
+            <figcaption data-i18n="showcase_safety">安全兜底转速</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <div class="support-modal" data-support-modal hidden>
+      <button class="support-backdrop" type="button" aria-label="Close" data-support-close></button>
+      <section class="support-card" role="dialog" aria-modal="true" aria-labelledby="support-title">
+        <div class="support-switch" role="tablist" aria-label="Payment method">
+          <button
+            class="support-switch-btn is-active"
+            type="button"
+            role="tab"
+            aria-selected="true"
+            data-support-method="wechat"
+            data-i18n="support_wechat"
+          >微信</button>
+          <button
+            class="support-switch-btn"
+            type="button"
+            role="tab"
+            aria-selected="false"
+            data-support-method="alipay"
+            data-i18n="support_alipay"
+          >支付宝</button>
+        </div>
+
+        <div class="support-qr-wrap">
+          <img
+            class="support-qr is-active"
+            data-support-panel="wechat"
+            src="./assets/support/wechat-native.png"
+            alt="WeChat support QR code"
+          />
+          <img
+            class="support-qr"
+            data-support-panel="alipay"
+            src="./assets/support/alipay-native.png"
+            alt="Alipay support QR code"
+          />
+        </div>
+
+        <div class="support-meta">
+          <div class="label-micro muted" id="support-title" data-i18n="support_title">支持作者</div>
+          <p class="support-name is-active" data-support-name="wechat" data-i18n="support_name_wechat">微信：PureMilk_chun（**淳）</p>
+          <p class="support-name" data-support-name="alipay" data-i18n="support_name_alipay">支付宝：**淳</p>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      (function () {
+        var STORAGE_KEY = "ifc_lang";
+        var texts = {
+          zh: {
+            hero_micro: "Apple Silicon Mac",
+            hero_tagline: "简洁的风扇控制工具。",
+            panel_home: "官方网站",
+            panel_open_source: "开源项目",
+            compat_label: "适用设备",
+            compat_title: "适用于带风扇的 M 系列 Mac",
+            mode_label: "控制模式",
+            mode_value: "自动 / 手动",
+            curve_label: "曲线编辑",
+            curve_value: "5 点风扇曲线",
+            panel_copy: "实时温度、转速、曲线控制，全部收进菜单栏。",
+            free_title: "Free Forever",
+            free_desc: "完全免费，无订阅，无内购。",
+            f1_label: "原生菜单栏",
+            f1_value: "实时查看温度与转速",
+            f2_label: "自动 / 手动",
+            f2_value: "按场景切换",
+            f3_label: "5 点曲线",
+            f3_value: "自定义温度 / RPM",
+            f4_label: "平滑过渡算法",
+            f4_value: "渐进调速，避免硬切不适",
+            support_button: "支持作者",
+            support_title: "支持作者",
+            support_wechat: "微信",
+            support_alipay: "支付宝",
+            support_name_wechat: "微信：PureMilk_chun（**淳）",
+            support_name_alipay: "支付宝：**淳",
+            cta_download: "下载应用",
+            cta_source: "查看源码",
+            iteration_label: "活跃迭代",
+            iteration_title: "开发者也是用户本身。",
+            iteration_body: "iFanControl 正在被真实使用，也正在持续修正。每一次小更新，都来自日常使用里发现的具体问题。",
+            iteration_builds: "次构建迭代",
+            iteration_channel: "更新通道",
+            iteration_current: "当前版本",
+            iteration_note: "本软件正在活跃迭代中，更新通道保持 ZIP-only。",
+            showcase_label: "界面展示",
+            showcase_title: "菜单栏、曲线编辑与实时控制",
+            showcase_status: "状态胶囊",
+            showcase_curve: "5 点曲线编辑",
+            showcase_sensor: "温度源与传感器分组",
+            showcase_menu: "菜单栏实时状态",
+            showcase_safety: "安全兜底转速",
+            footer_platform: "macOS 13+ / Apple Silicon",
+            footer_download: "下载 ZIP",
+            timeline_label: "更新日志",
+            timeline_title: "项目时间线",
+            timeline_expand: "展开完整时间线",
+            timeline_collapse: "收起",
+          },
+          en: {
+            hero_micro: "Apple Silicon Mac",
+            hero_tagline: "A restrained fan control utility.",
+            panel_home: "Official Homepage",
+            panel_open_source: "Open Source",
+            compat_label: "Supported Devices",
+            compat_title: "For fan-equipped M-series Macs",
+            mode_label: "Control Modes",
+            mode_value: "Auto / Manual",
+            curve_label: "Curve Editor",
+            curve_value: "5-Point Curve",
+            panel_copy: "Temp, RPM, and curve control in your menu bar.",
+            free_title: "Free Forever",
+            free_desc: "100% free. No subscription. No IAP.",
+            f1_label: "Menu Bar",
+            f1_value: "Live temp & RPM",
+            f2_label: "Auto / Manual",
+            f2_value: "Switch by scenario",
+            f3_label: "5-Point Curve",
+            f3_value: "Custom temp / RPM",
+            f4_label: "Smooth Transition",
+            f4_value: "Gradual RPM, no hard jumps",
+            support_button: "Support",
+            support_title: "Support",
+            support_wechat: "WeChat",
+            support_alipay: "Alipay",
+            support_name_wechat: "WeChat: PureMilk_chun (**淳)",
+            support_name_alipay: "Alipay: **淳",
+            cta_download: "Download App",
+            cta_source: "View Source",
+            iteration_label: "Active Iteration",
+            iteration_title: "The developer is also the user.",
+            iteration_body: "iFanControl is used in real daily work and refined through concrete issues found along the way.",
+            iteration_builds: "build iterations",
+            iteration_channel: "update channel",
+            iteration_current: "current version",
+            iteration_note: "This app is actively maintained. The update channel stays ZIP-only.",
+            showcase_label: "Interface",
+            showcase_title: "Menu bar control, curve editing, and live adjustments",
+            showcase_status: "Status pill",
+            showcase_curve: "5-point curve editor",
+            showcase_sensor: "Sensor groups and source picker",
+            showcase_menu: "Live menu bar view",
+            showcase_safety: "Safety floor control",
+            footer_platform: "macOS 13+ / Apple Silicon",
+            footer_download: "Download ZIP",
+            timeline_label: "Changelog",
+            timeline_title: "Project Timeline",
+            timeline_expand: "View Full Timeline",
+            timeline_collapse: "Collapse",
+          },
+        };
+
+        function resolveLang() {
+          var saved = localStorage.getItem(STORAGE_KEY);
+          if (saved === "zh" || saved === "en") return saved;
+          var raw = (navigator.languages && navigator.languages[0]) || navigator.language || "zh";
+          return /^zh/i.test(raw) ? "zh" : "en";
+        }
+
+        function applyLang(lang) {
+          var dict = texts[lang] || texts.zh;
+          var nodes = document.querySelectorAll("[data-i18n]");
+          for (var i = 0; i < nodes.length; i++) {
+            var key = nodes[i].getAttribute("data-i18n");
+            if (dict[key]) nodes[i].textContent = dict[key];
+          }
+          document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+          var buttons = document.querySelectorAll("[data-lang]");
+          for (var j = 0; j < buttons.length; j++) {
+            var active = buttons[j].getAttribute("data-lang") === lang;
+            buttons[j].classList.toggle("active", active);
+            buttons[j].setAttribute("aria-pressed", active ? "true" : "false");
+          }
+          renderTimeline();
+        }
+
+        var initial = resolveLang();
+        applyLang(initial);
+
+        var switcher = document.querySelector("[data-lang-switch]");
+        if (!switcher) return;
+        switcher.addEventListener("click", function (event) {
+          var target = event.target;
+          if (!target || !target.matches("[data-lang]")) return;
+          var lang = target.getAttribute("data-lang");
+          if (lang !== "zh" && lang !== "en") return;
+          localStorage.setItem(STORAGE_KEY, lang);
+          applyLang(lang);
+        });
+
+        var supportModal = document.querySelector("[data-support-modal]");
+        var supportOpen = document.querySelector("[data-support-open]");
+        var supportClose = document.querySelectorAll("[data-support-close]");
+        var supportMethods = document.querySelectorAll("[data-support-method]");
+        var supportPanels = document.querySelectorAll("[data-support-panel]");
+        var supportNames = document.querySelectorAll("[data-support-name]");
+        var supportCloseTimer = null;
+
+        function setSupportMethod(method) {
+          for (var i = 0; i < supportMethods.length; i++) {
+            var active = supportMethods[i].getAttribute("data-support-method") === method;
+            supportMethods[i].classList.toggle("is-active", active);
+            supportMethods[i].setAttribute("aria-selected", active ? "true" : "false");
+          }
+
+          for (var j = 0; j < supportPanels.length; j++) {
+            supportPanels[j].classList.toggle("is-active", supportPanels[j].getAttribute("data-support-panel") === method);
+          }
+
+          for (var k = 0; k < supportNames.length; k++) {
+            supportNames[k].classList.toggle("is-active", supportNames[k].getAttribute("data-support-name") === method);
+          }
+
+          if (supportModal) {
+            supportModal.setAttribute("data-support-theme", method);
+          }
+        }
+
+        function openSupport() {
+          if (!supportModal) return;
+          if (supportCloseTimer) {
+            clearTimeout(supportCloseTimer);
+            supportCloseTimer = null;
+          }
+          supportModal.hidden = false;
+          document.body.classList.add("modal-open");
+          requestAnimationFrame(function () {
+            supportModal.classList.add("is-visible");
+          });
+        }
+
+        function closeSupport() {
+          if (!supportModal) return;
+          supportModal.classList.remove("is-visible");
+          document.body.classList.remove("modal-open");
+          supportCloseTimer = setTimeout(function () {
+            supportModal.hidden = true;
+          }, 240);
+        }
+
+        if (supportOpen) {
+          supportOpen.addEventListener("click", openSupport);
+        }
+
+        for (var m = 0; m < supportClose.length; m++) {
+          supportClose[m].addEventListener("click", closeSupport);
+        }
+
+        for (var n = 0; n < supportMethods.length; n++) {
+          supportMethods[n].addEventListener("click", function () {
+            setSupportMethod(this.getAttribute("data-support-method"));
+          });
+        }
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") closeSupport();
+        });
+
+        function applyManifest(meta) {
+          if (!meta) return;
+          var versionNodes = document.querySelectorAll("[data-latest-version]");
+          for (var i = 0; i < versionNodes.length; i++) {
+            versionNodes[i].textContent = meta.latest_version || "--";
+          }
+
+          var buildValue = meta.latest_build != null ? String(meta.latest_build) : "--";
+          var buildNumberNodes = document.querySelectorAll("[data-latest-build-number]");
+          for (var j = 0; j < buildNumberNodes.length; j++) {
+            buildNumberNodes[j].textContent = buildValue;
+          }
+
+          var buildTagNodes = document.querySelectorAll("[data-latest-build]");
+          for (var k = 0; k < buildTagNodes.length; k++) {
+            buildTagNodes[k].textContent = "build " + buildValue;
+          }
+        }
+
+        fetch("./update-manifest.json", { cache: "no-store" })
+          .then(function (response) {
+            if (!response.ok) throw new Error("manifest_unavailable");
+            return response.json();
+          })
+          .then(applyManifest)
+          .catch(function () {});
+
+        /* ── Timeline ── */
+        var TIMELINE_RECENT_DAYS = 1;
+        var timelineData = null;
+        var timelineTrack = document.querySelector("[data-timeline-track]");
+        var timelineExpandBtn = document.querySelector("[data-timeline-expand]");
+
+        function formatDateHeading(dateStr, lang) {
+          var parts = dateStr.split("-");
+          var y = parts[0], m = parseInt(parts[1], 10), d = parseInt(parts[2], 10);
+          if (lang === "zh") {
+            return y + " 年 " + m + " 月 " + d + " 日";
+          }
+          var months = ["January","February","March","April","May","June",
+                        "July","August","September","October","November","December"];
+          return months[m - 1] + " " + d + ", " + y;
+        }
+
+        function renderTimeline(forceExpand) {
+          if (!timelineTrack || !timelineData) return;
+          var lang = (function () {
+            var saved = localStorage.getItem(STORAGE_KEY);
+            if (saved === "zh" || saved === "en") return saved;
+            var raw = (navigator.languages && navigator.languages[0]) || navigator.language || "zh";
+            return /^zh/i.test(raw) ? "zh" : "en";
+          })();
+          var dict = texts[lang] || texts.zh;
+          var isExpanded = timelineTrack.classList.contains("is-expanded");
+          if (typeof forceExpand === "boolean") isExpanded = forceExpand;
+
+          var visibleGroups = isExpanded ? timelineData : timelineData.slice(0, TIMELINE_RECENT_DAYS);
+
+          var html = "";
+          for (var g = 0; g < visibleGroups.length; g++) {
+            var group = visibleGroups[g];
+            html += '<div class="timeline-date-group">';
+            html += '<div class="timeline-date-header">';
+            html += '<div class="timeline-date-dot" aria-hidden="true"></div>';
+            html += '<span class="timeline-date-text">' + formatDateHeading(group.date, lang) + '</span>';
+            html += '</div>';
+            for (var e = 0; e < group.entries.length; e++) {
+              var entry = group.entries[e];
+              html += '<div class="timeline-entry">';
+              html += '<div class="timeline-entry-dot" aria-hidden="true"></div>';
+              html += '<div class="timeline-entry-content">';
+              html += '<span class="timeline-entry-time">' + entry.time + '</span>';
+              html += '<div class="timeline-entry-body">';
+              if (entry.version) {
+                html += '<span class="timeline-entry-version">' + entry.version + '</span>';
+              }
+              html += '<span class="timeline-entry-desc">' + entry.desc[lang] + '</span>';
+              html += '</div></div></div>';
+            }
+            html += '</div>';
+          }
+          timelineTrack.innerHTML = html;
+
+          if (isExpanded) {
+            timelineTrack.classList.add("is-expanded");
+          } else {
+            timelineTrack.classList.remove("is-expanded");
+          }
+
+          if (timelineExpandBtn) {
+            if (isExpanded) {
+              timelineExpandBtn.textContent = dict.timeline_collapse;
+            } else {
+              timelineExpandBtn.textContent = dict.timeline_expand;
+            }
+            timelineExpandBtn.style.display = timelineData.length <= TIMELINE_RECENT_DAYS ? "none" : "";
+          }
+        }
+
+        if (timelineExpandBtn) {
+          timelineExpandBtn.addEventListener("click", function () {
+            var isCurrentlyExpanded = timelineTrack.classList.contains("is-expanded");
+            renderTimeline(!isCurrentlyExpanded);
+          });
+        }
+
+        fetch("./timeline.json", { cache: "no-store" })
+          .then(function (response) {
+            if (!response.ok) throw new Error("timeline_unavailable");
+            return response.json();
+          })
+          .then(function (data) {
+            timelineData = data;
+            renderTimeline(false);
+          })
+          .catch(function () {});
+
+      })();
+    </script>
+  </body>
+</html>

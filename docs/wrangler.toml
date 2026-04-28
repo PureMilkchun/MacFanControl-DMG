@@ -1,0 +1,7 @@
+name = "ifan"
+pages_build_output_dir = "./"
+
+[[d1_databases]]
+binding = "IFAN_DB"
+database_name = "ifan-stats-db"
+database_id = "383dadba-cf12-47f1-bf53-dbf2f087458f"

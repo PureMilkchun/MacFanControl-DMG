@@ -1,0 +1,136 @@
+[
+  {
+    "date": "2026-04-28",
+    "entries": [
+      {
+        "time": "16:45",
+        "version": "v2.9.5 / build 38",
+        "desc": {
+          "zh": "开机自启动改用原生登录项 API，在系统设置中可直接管理。kentsmc 子进程超时保护，防止硬件监控卡死。风扇初始转速从实际读数开始，避免从零起步。菜单栏图标自动恢复，SystemUIServer 重启后不再消失。",
+          "en": "Login item now uses native API, manageable in System Settings. kentsmc subprocess timeout protection prevents hardware monitoring deadlock. Fan now starts from actual RPM reading instead of zero. Menu bar icon auto-recovers after SystemUIServer restart."
+        }
+      },
+      {
+        "time": "00:40",
+        "version": "v2.9.5 / build 35",
+        "desc": {
+          "zh": "新增「告诉开发者」反馈入口，支持直接发送意见和建议。Bug 修复与性能优化。",
+          "en": "Added \"Talk to Dev\" feedback entry for sending suggestions directly. Bug fixes and performance improvements."
+        }
+      }
+    ]
+  },
+  {
+    "date": "2026-04-27",
+    "entries": [
+      {
+        "time": "19:46",
+        "version": "v2.9.4 / build 34",
+        "desc": {
+          "zh": "风扇曲线编辑器优化：编辑控制点时右下角实时显示当前温度和转速。Bug 修复。",
+          "en": "Fan curve editor optimization: real-time temp/RPM display while editing control points. Bug fixes."
+        }
+      },
+      {
+        "time": "12:00",
+        "version": "v2.9.3 / build 33",
+        "desc": {
+          "zh": "风扇曲线预设系统：3 个预设 Tab（A/B/C），一键切换不同场景的风扇曲线。双击重命名，即时生效，关闭自动保存。",
+          "en": "Fan curve preset system: 3 preset tabs (A/B/C), one-click switch between scenarios. Double-click rename, instant apply, auto-save on close."
+        }
+      }
+    ]
+  },
+  {
+    "date": "2026-04-26",
+    "entries": [
+      {
+        "time": "10:17",
+        "version": "v2.9.1 / build 31",
+        "desc": {
+          "zh": "菜单栏点击响应速度大幅提升，操作更流畅。优化后台资源占用，降低内存使用。",
+          "en": "Menu bar click response significantly improved. Optimized background resource usage and reduced memory."
+        }
+      },
+      {
+        "time": "09:38",
+        "version": "v2.9.0 / build 30",
+        "desc": {
+          "zh": "内存占用优化：菜单系统重构，内存从 ~90MB 降至 ~39MB。删除无用代码，提升运行效率。",
+          "en": "Memory optimization: menu system refactored, memory dropped from ~90MB to ~39MB. Removed dead code."
+        }
+      }
+    ]
+  },
+  {
+    "date": "2026-04-25",
+    "entries": [
+      {
+        "time": "15:38",
+        "version": "v2.8.28 / build 28",
+        "desc": {
+          "zh": "多语言切换：首次安装时可选择中文/English，菜单中可随时切换语言（重启后生效）。",
+          "en": "Multi-language support: choose Chinese/English on first launch, switch anytime in menu (restart required)."
+        }
+      },
+      {
+        "time": "06:50",
+        "version": "v2.8.27 / build 27",
+        "desc": {
+          "zh": "新增匿名统计说明问号入口。适配 M5，已在 MacBook Pro M5 上验证。",
+          "en": "Added anonymous stats explanation entry. M5 support verified on MacBook Pro M5."
+        }
+      },
+      {
+        "time": "06:17",
+        "version": "v2.8.26 / build 26",
+        "desc": {
+          "zh": "优化产品健康度统计与数据刷新体验，改进相关设置文案。",
+          "en": "Improved stats and data refresh experience. Refined settings copy."
+        }
+      }
+    ]
+  },
+  {
+    "date": "2026-04-24",
+    "entries": [
+      {
+        "time": "10:12",
+        "version": "v2.8.25 / build 25",
+        "desc": {
+          "zh": "新增隐私优先的匿名活跃统计（每天最多一次，可在关于/帮助中关闭）。",
+          "en": "Privacy-first anonymous active stats (once per day, can be disabled in About/Help)."
+        }
+      },
+      {
+        "time": "05:28",
+        "version": "v2.8.24 / build 24",
+        "desc": {
+          "zh": "修复自动检查更新可能被上次检查时间挡住的问题。",
+          "en": "Fixed auto-update check being blocked by previous check timestamp."
+        }
+      },
+      {
+        "time": "05:00",
+        "version": "v2.8.23 / build 23",
+        "desc": {
+          "zh": "修复关于/帮助界面在系统深浅色切换后卡片与二维码换色不完整的问题。手动转速弹窗新增说明。",
+          "en": "Fixed About/Help card and QR code not updating on dark/light mode switch. Added manual RPM explanation."
+        }
+      }
+    ]
+  },
+  {
+    "date": "2026-04-23",
+    "entries": [
+      {
+        "time": "10:00",
+        "version": "v2.8.21",
+        "desc": {
+          "zh": "修复自动更新包缺少安装脚本导致更新失败的问题。重新打包确保 install.sh、App 与 kentsmc 一并提供。",
+          "en": "Fixed auto-update package missing install script. Repackaged to include install.sh, App and kentsmc."
+        }
+      }
+    ]
+  }
+]

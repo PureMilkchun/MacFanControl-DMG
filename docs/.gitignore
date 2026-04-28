@@ -1,0 +1,14 @@
+# Historical ZIP archives (too large for git)
+iFanControl-macOS-*.zip
+
+# Cloudflare Wrangler config
+.wrangler/
+
+# Backup files
+_worker.js.bak
+
+# Verification token
+3000cb1ad5bfd01626aa8a7d81e36de3.txt
+
+# DMG
+iFanControl-macOS.dmg
